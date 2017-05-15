@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>{{item.name}}</h1>
+
+        <p>Users who added this product/item under their wish list:</p>
+        <ul>
+            {% for x in list %}
+            <li>{{x.user.name}}</li>
+                {% endfor %}
+        </ul>
+
+        <form action="/dashboard" method = "post">
+            {% csrf_token %}
+            <input type = "submit" value="Home">
+        </form>
+
+        <form action="/logout" method = "post">
+            {% csrf_token %}
+            <input type = "submit" value="Logout">
+        </form>
+    </body>
+</html>

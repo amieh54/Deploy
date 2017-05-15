@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+        <h1>Hello {{request.session.name}}!</h1>
+
+<!-- <h1>{{add_item.name}}</h1>
+<!-- <ul> -->
+
+<h3>Your Wishlist</h3>
+<table>
+    <th>Item</th>
+    <th>Added By</th>
+    <th>Date Added</th>
+    <th>Action</th>
+{% for x in mylist %}
+
+<tr>
+    <td><a href="{% url "belt:viewitem" id=x.item_id %}">{{x.item.name}}</a></td>
+    <td>{{x.item.added_by.name}}</td>
+    <td>{{x.item.date_added}}</td>
+    <td><a href="{% url "belt:remove" id=x.item_id %}">Remove from my Wishlist</a></td>
+    </tr>
+{% endfor %}
+{% for x in addeditems %}
+<tr>
+        <td><a href="{% url "belt:viewitem" id=x.id %}">{{x.name}}</a></td>
+        <td>{{x.added_by.name}}</td>
+        <td>{{x.date_added}}</td>
+        <td><a href="{% url "belt:delete" id=x.id %}">Delete</a></td>
+    </tr>
+{% endfor %}
+
+</table>
+<h3>Other Users' Wishlist</h3>
+        <table>
+            <th>Item</th>
+            <th>Added By</th>
+            <th>Date Added</th>
+            <th>Action</th>
+
+            {% for x in items %}
+            <tr>
+                <td><a href="{% url "belt:viewitem" id=x.id %}">{{x.name}}</a></td>
+                <td>{{x.added_by.name}}</td>
+                <td>{{x.date_added}}</td>
+                <td><a href="{% url "belt:addwish" id=x.id %}">Add to my Wishlist</a></td>
+            </tr>
+                {% endfor %}
+        </table>
+
+
+<form action="/add_item" method="post">
+        {% csrf_token %}
+    <input type="submit" name="add_item" value="Add Item">
+
+</form>
+<form action="/logout" method = "post">
+    {% csrf_token %}
+    <input type = "submit" value="Logout">
+</form>
+
+
+    </body>
+</html>

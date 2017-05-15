@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Register</h1>
+
+
+        {% for x in request.session.errors %}
+      <ul>
+          <div class = "errors"><li>Error: {{x}}</li></div>
+      </ul>
+
+        {% endfor %}
+
+
+        <form action = '/regprocess' method='post'>
+                {% csrf_token %}
+            <p>Name:</p><input type = "text" name ='name'>
+            <p>Username:</p><input type = "text" name ='username'>
+            <p>Password</p><input type = "password" name ='password'>
+            <p>Confirm Password:</p><input type = "password" name ='cpassword'>
+            <p>Date Hired:</p><input type='date' name='datehired'>
+            <input type = "submit" name = 'register' value="Register">
+        </form>
+
+        <h1>Login</h1>
+
+        {% for x in request.session.logerror %}
+      <ul>
+          <div class = "errors"></li>Error: {{x}}</li></div>
+      </ul>
+
+        {% endfor %}
+        <form action = '/logprocess' method='post'>
+                {% csrf_token %}
+            <p>Username:</p><input type = "text" name ='username'>
+            <p>Password:</p><input type = "password" name ='login_password'>
+            <input type = "submit" name = 'login' value="Login">
+
+
+        </form>
+    </body>
+</html>
